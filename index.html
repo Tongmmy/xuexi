@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucky 49 预测游戏</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="brand">
+            <span class="brand-mark">49</span>
+            <div>
+              <p>Lucky 49</p>
+              <span>Auto Draw Prediction Board</span>
+            </div>
+          </div>
+          <div class="hero-chip">每 20 秒自动开奖</div>
+        </div>
+
+        <div class="hero-main">
+          <section class="hero-copy">
+            <span class="eyebrow">纯前端互动原型</span>
+            <h1>更轻量的号码预测玩法，操作一步完成</h1>
+            <p>
+              改成自动倒计时开奖的娱乐积分模式，用户只需要选一个方向并提交，页面会自动结算、自动进入下一期，交互更顺手，也更适合做前端展示。
+            </p>
+          </section>
+
+          <section class="hero-stats">
+            <article class="stat-card">
+              <span>初始积分</span>
+              <strong id="balanceDisplay">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>本期待结算</span>
+              <strong id="betCountDisplay">0</strong>
+            </article>
+            <article class="stat-card emphasis">
+              <span>累计盈亏</span>
+              <strong id="profitDisplay">0</strong>
+            </article>
+          </section>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="card control-card">
+          <div class="section-heading">
+            <div>
+              <span class="tag">本期操作</span>
+              <h2>简化预测面板</h2>
+            </div>
+            <p>选择一个玩法方向与分值即可，不再需要复杂选号。</p>
+          </div>
+
+          <div class="timer-block">
+            <div>
+              <span class="timer-label">距离第 <strong id="roundDisplay">1</strong> 期开奖</span>
+              <h3 id="countdownDisplay">20s</h3>
+            </div>
+            <div class="timer-track">
+              <div class="timer-bar" id="timerBar"></div>
+            </div>
+          </div>
+
+          <form id="betForm" class="bet-form">
+            <div class="choice-group">
+              <span class="group-label">玩法类型</span>
+              <div class="segmented" id="categoryGroup">
+                <button type="button" class="segment active" data-group="category" data-value="size">大 / 小</button>
+                <button type="button" class="segment" data-group="category" data-value="parity">单 / 双</button>
+                <button type="button" class="segment" data-group="category" data-value="wave">波色</button>
+              </div>
+            </div>
+
+            <div class="choice-group">
+              <span class="group-label">当前选项</span>
+              <div class="option-grid" id="optionGrid"></div>
+            </div>
+
+            <div class="choice-group compact-row">
+              <label>
+                <span class="group-label">投入分值</span>
+                <input type="number" id="stakeInput" min="100" step="100" value="1000" />
+              </label>
+              <button class="primary-button" type="submit">加入本期</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card draw-card">
+          <div class="section-heading">
+            <div>
+              <span class="tag">自动开奖</span>
+              <h2>最新结果</h2>
+            </div>
+            <p id="resultMeta">等待首期开奖</p>
+          </div>
+
+          <div class="result-panel">
+            <div class="result-number" id="resultNumber">--</div>
+            <div class="result-attributes">
+              <div class="attr-pill" id="resultSize">大小待定</div>
+              <div class="attr-pill" id="resultParity">单双待定</div>
+              <div class="attr-pill" id="resultWave">波色待定</div>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span class="legend-item red">红波</span>
+            <span class="legend-item blue">蓝波</span>
+            <span class="legend-item green">绿波</span>
+          </div>
+        </section>
+
+        <section class="side-column">
+          <article class="card">
+            <div class="section-heading compact">
+              <h3>本期待结算</h3>
+              <span id="pendingStakeDisplay">总投入 0</span>
+            </div>
+            <div class="ticket-list" id="ticketList"></div>
+          </article>
+
+          <article class="card">
+            <div class="section-heading compact">
+              <h3>最近 6 期</h3>
+              <span>自动刷新</span>
+            </div>
+            <div class="history-list" id="historyList"></div>
+          </article>
+
+          <article class="card notice-card" id="noticePanel">
+            <span class="tag">系统消息</span>
+            <h3>已开启自动模式</h3>
+            <p>页面会自动倒计时开奖，你只需要在开奖前加入本期预测。</p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
